@@ -8,7 +8,11 @@ gem 'rake'
 gem 'mongo'
 gem 'bson_ext'
 
+gem 'ox'
+
 group :test do
   gem 'rspec'
   gem 'rack-test'
+  gem 'vcr'
+  gem 'webmock'
 end
