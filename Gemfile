@@ -5,10 +5,9 @@ gem 'rack'
 gem 'rack-contrib'
 gem 'rake'
 
-gem 'mongo'
-gem 'bson_ext'
-
 gem 'ox'
+
+gem 'aws-record'
 
 group :test do
   gem 'rspec'
