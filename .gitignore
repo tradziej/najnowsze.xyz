@@ -1,0 +1,4 @@
+.aws-sam
+vendor
+.bundle
+env.json

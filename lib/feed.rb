@@ -13,7 +13,7 @@ class Feed
         title: item.locate('title').first.text,
         description: item.locate('description').first.text,
         link: item.locate('link').first.text,
-        comments: item.locate('comments').first.text
+        guid: item.locate('guid').first.text
       )
     end
   end

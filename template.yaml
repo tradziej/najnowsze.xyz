@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "wykop.pl lite client"
+
+Resources:
+  FetcherFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: fetcher.handler
+      Runtime: ruby2.5
+      Timeout: 300
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: !Ref ItemsTable
+      Environment:
+        Variables:
+          ITEMS_TABLE: !Ref ItemsTable
+
+  ItemsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions: 
+        - 
+          AttributeName: "date"
+          AttributeType: "S"
+        - 
+          AttributeName: "guid"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "date"
+          KeyType: "HASH"
+        - 
+          AttributeName: "guid"
+          KeyType: "RANGE"
+
+  ScheduledRule:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: rate(10 minutes)
+      State: ENABLED
+      Targets:
+        -
+          Arn:
+            Fn::GetAtt:
+              - FetcherFunction
+              - Arn
+          Id: TargetFunctionV1
+
+  PermissionForEventsToInvokeLambda:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: FetcherFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+          - ScheduledRule
+          - Arn
+
+Outputs:
+  ItemsTable:
+    Description: "Items Dynamo DB table"
+    Value:
+      Fn::GetAtt:
+      - ItemsTable
+      - Arn
+
+  FetcherFunction:
+    Value:
+      Fn::GetAtt:
+      - FetcherFunction
+      - Arn
