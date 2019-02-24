@@ -20,6 +20,9 @@ class Feed
 
  private
   def document
+    Ox.default_options = {
+      encoding: 'UTF-8'
+    }
     Ox.load(xml)
   end
 
