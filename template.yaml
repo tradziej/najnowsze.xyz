@@ -24,14 +24,14 @@ Resources:
           AttributeName: "date"
           AttributeType: "S"
         - 
-          AttributeName: "guid"
+          AttributeName: "time_guid"
           AttributeType: "S"
       KeySchema: 
         - 
           AttributeName: "date"
           KeyType: "HASH"
         - 
-          AttributeName: "guid"
+          AttributeName: "time_guid"
           KeyType: "RANGE"
 
   ScheduledRule:

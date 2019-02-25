@@ -3,10 +3,16 @@ require_relative 'models/item'
 
 def handler(event:, context:)
   Feed.new.each do |item|
-    return if Item.find(date: item[:date], guid: item[:guid])
+    date = item[:date].to_date.to_s
+    time = item[:date].strftime('%H:%M:%S')
+    guid = item[:guid].split('/')[-1]
+    time_guid = "#{time}-#{guid}"
+    return if Item.find(date: date, time_guid: time_guid)
     
     Item.new(
-      date: item[:date],
+      date: date,
+      time_guid: time_guid,
+      created_at: item[:date],
       guid: item[:guid],
       link: item[:link],
       title: item[:title],

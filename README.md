@@ -42,7 +42,7 @@ docker run -d -p 8000:8000 amazon/dynamodb-local
 
 SAM local doesn't evaluate CloudFormation conditionals so you must create DynamoDB Tables by yourself:
 ```
-aws dynamodb create-table --endpoint-url http://localhost:8000 --table-name items-table --attribute-definitions AttributeName=date,AttributeType=S AttributeName=guid,AttributeType=S --key-schema AttributeName=date,KeyType=HASH AttributeName=guid,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+aws dynamodb create-table --endpoint-url http://localhost:8000 --table-name items-table --attribute-definitions AttributeName=date,AttributeType=S AttributeName=time_guid,AttributeType=S --key-schema AttributeName=date,KeyType=HASH AttributeName=time_guid,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 ```
 
 ```

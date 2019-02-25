@@ -5,8 +5,10 @@ class Item
 
   set_table_name ENV['ITEMS_TABLE']
 
-  datetime_attr :date, hash_key: true
-  string_attr :guid, range_key: true
+  string_attr :date, hash_key: true
+  string_attr :time_guid, range_key: true
+  string_attr :guid
+  datetime_attr :created_at
   string_attr :link
   string_attr :title
   string_attr :description
