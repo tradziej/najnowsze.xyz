@@ -18,7 +18,7 @@ gem install bundler
 
 Install gems:
 ```
-bundle install
+bundle install --no-deployment
 ```
 
 Install gems to `vendor/bundle/` directory:
@@ -52,4 +52,9 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 ### Fetcher
 ```
 sam local invoke --env-vars env.json --no-event FetcherFunction
+```
+
+## Testing
+```
+rspec spec
 ```

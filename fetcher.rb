@@ -1,5 +1,5 @@
 require_relative 'lib/feed'
-require_relative 'app/models/item'
+require_relative 'models/item'
 
 def handler(event:, context:)
   Feed.new.each do |item|
