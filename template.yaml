@@ -52,6 +52,9 @@ Resources:
         - 
           AttributeName: "time_guid"
           KeyType: "RANGE"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
 
   ScheduledRule:
     Type: AWS::Events::Rule
