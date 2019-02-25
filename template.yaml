@@ -3,6 +3,25 @@ Transform: AWS::Serverless-2016-10-31
 Description: "wykop.pl lite client"
 
 Resources:
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: api.handler
+      Runtime: ruby2.5
+      Timeout: 300
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: get
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: !Ref ItemsTable
+      Environment:
+        Variables:
+          ITEMS_TABLE: !Ref ItemsTable
+
   FetcherFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -72,3 +91,13 @@ Outputs:
       Fn::GetAtt:
       - FetcherFunction
       - Arn
+
+  ApiFunction:
+    Value:
+      Fn::GetAtt:
+      - ApiFunction
+      - Arn
+
+  ApiUrl:
+    Description: "API Gateway endpoint URL for geting items"
+    Value: !Sub "https://${ApiFunction}.execute-api.${AWS::Region}.amazonaws.com/Prod/items"

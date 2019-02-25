@@ -54,6 +54,19 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 sam local invoke --env-vars env.json --no-event FetcherFunction
 ```
 
+### API
+```
+sam local invoke --env-vars env.json --no-event ApiFunction
+```
+
+```
+sam local start-api --env-vars env.json
+```
+
+```
+curl -i -H "Content-Type: application/json" http://127.0.0.1:3000/items
+```
+
 ## Testing
 ```
 rspec spec
