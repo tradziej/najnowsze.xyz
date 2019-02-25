@@ -2,3 +2,4 @@
 vendor
 .bundle
 env.json
+packaged.yaml

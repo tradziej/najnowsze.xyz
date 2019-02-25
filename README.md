@@ -71,3 +71,23 @@ curl -i -H "Content-Type: application/json" http://127.0.0.1:3000/items
 ```
 rspec spec
 ```
+
+## Packaging and deployment
+You need to have a `S3 bucket` to upload zipped functions. You could create it like that:
+```
+aws s3 mb s3://BUCKET_NAME
+```
+
+```
+bundle install --deployment --without test development
+```
+
+To package functions as ZIP and upload on S3 bucket:
+```
+sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket BUCKET_NAME
+```
+
+To deploy the packaged template:
+```
+aws cloudformation deploy --template-file packaged.yaml --capabilities CAPABILITY_IAM --stack-name <YOUR STACK NAME>
+```
