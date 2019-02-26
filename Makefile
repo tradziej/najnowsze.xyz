@@ -35,6 +35,9 @@ sam-deploy:
 
 deploy: install-deployment create-s3-bucket sam-package sam-deploy
 
+destroy:
+	@aws cloudformation delete-stack --stack-name $(STACK_NAME)
+
 start-local-dynamodb:
 	@docker run -d -p 8000:8000 amazon/dynamodb-local
 
