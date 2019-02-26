@@ -27,7 +27,19 @@ class Item
     as_json(*options).to_json(*options)
   end
 
-  def self.recent
+  def self.yesterday
+    Item.query(
+      key_condition_expression: '#H = :h',
+      expression_attribute_names: {
+        '#H' => 'date'
+      },
+      expression_attribute_values: {
+        ':h' => Date.today.prev_day.to_s
+      }
+    ).to_a
+  end
+
+  def self.today
     Item.query(
       key_condition_expression: '#H = :h',
       expression_attribute_names: {
@@ -37,6 +49,10 @@ class Item
         ':h' => Date.today.to_s
       }
     ).to_a
+  end
+
+  def self.recent
+    self.yesterday + self.today
   end
 
   if ENV['AWS_SAM_LOCAL']
