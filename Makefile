@@ -41,6 +41,10 @@ destroy:
 start-local-dynamodb:
 	@docker run -d -p 8000:8000 amazon/dynamodb-local
 
+validate-template:
+	@aws cloudformation validate-template \
+			--template-body file://template.yaml
+
 run:
 	@sam local start-api --env-vars env.json
 
