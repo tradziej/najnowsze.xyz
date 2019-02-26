@@ -18,7 +18,7 @@ gem install bundler
 
 Install gems:
 ```
-bundle install --no-deployment
+bundle install --no-deployment --with test
 ```
 
 Install gems to `vendor/bundle/` directory:
@@ -29,7 +29,8 @@ It is needed for local testing and deployment.
 
 Native extension workaround (needed for `ox` gem):
 ```
-docker run -v `pwd`:`pwd` -w `pwd` -i -t lambci/lambda:build-ruby2.5 bundle install --deployment
+docker run -v `pwd`:`pwd` -w `pwd` -i -t lambci/lambda:build-ruby2.5 \
+    bundle install --deployment --without test development
 ```
 Ref: [twitter](https://twitter.com/alexwwood/status/1068421791918448640) or [blog](https://www.cookieshq.co.uk/posts/how-to-build-a-serverless-twitter-bot-with-ruby-and-aws-lambda)
 
@@ -84,10 +85,19 @@ bundle install --deployment --without test development
 
 To package functions as ZIP and upload on S3 bucket:
 ```
-sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket BUCKET_NAME
+sam package \
+    --template-file template.yaml \
+    --output-template-file packaged.yaml \
+    --s3-bucket BUCKET_NAME
 ```
 
 To deploy the packaged template:
 ```
-aws cloudformation deploy --template-file packaged.yaml --capabilities CAPABILITY_IAM --stack-name <YOUR STACK NAME>
+sam deploy \
+    --template-file packaged.yaml \
+    --capabilities CAPABILITY_IAM \
+    --stack-name <YOUR STACK NAME>
 ```
+
+## Makefile
+Project contains the [Makefile](Makefile) which you could use for several common tasks after customisation.
