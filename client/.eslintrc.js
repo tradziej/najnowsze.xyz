@@ -8,6 +8,9 @@ module.exports = {
       jsx: true,
     },
   },
+  rules: {
+    'no-undef': 'off',
+  },
   plugins: ['react'],
   env: {
     browser: true,
