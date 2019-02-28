@@ -2,12 +2,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const modeConfig = env => require(`./build-utils/webpack.${env.mode}.js`)(env);
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (env = { mode: 'production' }) => {
   return webpackMerge(
     {
       mode: env.mode,
       plugins: [
+        new Dotenv(),
         new HtmlWebpackPlugin({
           hash: true,
           template: './src/index.html',
