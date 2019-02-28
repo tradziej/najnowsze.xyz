@@ -4,6 +4,7 @@ export const big = 1680;
 
 export const colors = {
   white: '#fafafa',
+  grey: '#a9a9a9',
   black: '#2C3E50',
   orange: '#ff5917',
   blue: '#4383af',

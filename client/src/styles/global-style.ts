@@ -21,4 +21,15 @@ export const GlobalStyle = createGlobalStyle`
   strong {
     ${fontBold};
   }
+
+  a {
+    text-decoration: none;
+    color: ${props => props.theme.colors.blue};
+    border-bottom: 1px dotted ${props => props.theme.colors.black};
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: ${props => props.theme.colors.grey};
+  }
 `;
