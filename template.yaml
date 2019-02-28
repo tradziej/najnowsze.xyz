@@ -107,4 +107,4 @@ Outputs:
 
   ApiUrl:
     Description: "API Gateway endpoint URL for geting items"
-    Value: !Sub "https://${ApiFunction}.execute-api.${AWS::Region}.amazonaws.com/Prod/items"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/items"
