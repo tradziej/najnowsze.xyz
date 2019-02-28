@@ -45,6 +45,17 @@ validate-template:
 	@aws cloudformation validate-template \
 			--template-body file://template.yaml
 
+describe:
+	@aws cloudformation describe-stacks \
+		--region $(AWS_REGION) \
+		--stack-name $(STACK_NAME) \
+
+outputs:
+	@aws cloudformation describe-stacks \
+		--region $(AWS_REGION) \
+		--stack-name $(STACK_NAME) \
+		--query 'Stacks[].Outputs'
+
 run:
 	@sam local start-api --env-vars env.json
 
