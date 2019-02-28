@@ -8,10 +8,16 @@ module.exports = {
       jsx: true,
     },
   },
-  rules: {
-    'no-undef': 'off',
-    'react/prop-types': 'off',
-  },
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      rules: {
+        'no-unused-vars': ['off'],
+        'no-undef': ['off'],
+        'react/prop-types': 'off',
+      },
+    },
+  ],
   plugins: ['react'],
   env: {
     browser: true,
