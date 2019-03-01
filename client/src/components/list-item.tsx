@@ -9,7 +9,7 @@ type Props = {
 };
 
 const StyledLi = styled.li`
-  padding: 5px;
+  padding: 8px 5px;
 `;
 
 const CommentsLink = styled.a`

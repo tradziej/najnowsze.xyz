@@ -57,7 +57,6 @@ class App extends React.Component<Props, State> {
 
 const Contianer = styled.div`
   height: 100%;
-  width: 100%;
   margin: 0 50px 50px;
   padding-top: 20px;
 `;
@@ -65,7 +64,7 @@ const Contianer = styled.div`
 const Title = styled('h1')`
   ${fontRegular};
   color: ${props => props.theme.colors.orange};
-  margin: 0 auto 30px -20px;
+  margin: 0 auto 30px -25px;
 `;
 
 export default hot(App);

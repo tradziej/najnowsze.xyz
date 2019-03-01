@@ -1,5 +1,6 @@
 import { createGlobalStyle } from '../styled-components';
 import { fontFamily, fontBold } from './variables';
+import media from './media';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -12,6 +13,11 @@ export const GlobalStyle = createGlobalStyle`
   html {
     background: ${props => props.theme.colors.white};
     color: ${props => props.theme.colors.black};
+    font-size: 1.250em;
+
+    ${media.tablet`
+      font-size: 1.125em;
+    `};
   }
 
   body {
