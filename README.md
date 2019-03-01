@@ -99,5 +99,7 @@ sam deploy \
     --stack-name <YOUR STACK NAME>
 ```
 
+How to set up Amazon's API Gateway custom domain with Cloudflare: [instructions](http://www.leanx.eu/tutorials/set-up-amazons-api-gateway-custom-domain-with-cloudflare).
+
 ## Makefile
 Project contains the [Makefile](Makefile) which you could use for several common tasks after customisation.
