@@ -11,7 +11,7 @@ type Props = {};
 
 type State = {
   items: Item[];
-  loading: boolean;
+  isLoading: boolean;
   error: string;
 };
 
@@ -20,7 +20,7 @@ class App extends React.Component<Props, State> {
     super(props, context);
     this.state = {
       items: [],
-      loading: false,
+      isLoading: false,
       error: '',
     };
   }
@@ -31,6 +31,7 @@ class App extends React.Component<Props, State> {
         <Contianer>
           <main>
             <Title>Najnowsze</Title>
+            {this.state.isLoading && <div>Wczytywanie...</div>}
             <ItemsList items={this.state.items} />
             <GlobalStyle />
           </main>
@@ -40,14 +41,14 @@ class App extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
+    this.setState({ isLoading: true });
     const api = new Api();
 
     api
       .getItems()
       .then(res => {
         const items = res.data.items;
-        this.setState({ items, loading: false });
+        this.setState({ items, isLoading: false });
       })
       .catch((err: Error) => {
         this.setState({ error: "Can't get items" });
