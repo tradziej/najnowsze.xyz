@@ -1,9 +1,13 @@
 import { colors } from './variables';
 
-export interface ThemeInterface {
+export interface Theme {
   colors: { [key in keyof typeof colors]: string };
 }
 
-export const theme: ThemeInterface = {
+export interface ThemeProps {
+  theme: Theme;
+}
+
+export const theme: Theme = {
   colors,
 };

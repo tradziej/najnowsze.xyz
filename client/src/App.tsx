@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import styled, { ThemeProvider } from './styled-components';
 import { GlobalStyle, theme } from './styles';
 import { fontRegular } from './styles/variables';
-import ItemsList from './components/items-list';
+import ItemList from './features/items/components/ItemList';
 import Api from './api';
 import Item from './api/interfaces/item';
 
@@ -32,7 +32,7 @@ class App extends React.Component<Props, State> {
           <main>
             <Title>Najnowsze</Title>
             {this.state.isLoading && <div>Wczytywanie...</div>}
-            <ItemsList items={this.state.items} />
+            <ItemList items={this.state.items} />
             <GlobalStyle />
           </main>
         </Contianer>
