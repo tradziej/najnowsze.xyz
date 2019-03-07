@@ -74,6 +74,8 @@ rspec spec
 ```
 
 ## Packaging and deployment
+### Lambda backend
+
 You need to have a `S3 bucket` to upload zipped functions. You could create it like that:
 ```
 aws s3 mb s3://BUCKET_NAME
@@ -100,6 +102,21 @@ sam deploy \
 ```
 
 How to set up Amazon's API Gateway custom domain with Cloudflare: [instructions](http://www.leanx.eu/tutorials/set-up-amazons-api-gateway-custom-domain-with-cloudflare).
+
+### React frontend
+```
+cd client && yarn prod
+```
+
+To upload files to previously created S3 bucket:
+```
+aws s3 sync --acl public-read dist/ s3://{BUCKET_NAME}
+``` 
+
+To invalidate CloudFront cache:
+```
+aws cloudfront create-invalidation --distribution-id {DISTRIBUTION_ID} --paths '/*'
+```
 
 ## Makefile
 Project contains the [Makefile](Makefile) which you could use for several common tasks after customisation.
