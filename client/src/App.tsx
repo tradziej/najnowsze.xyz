@@ -1,60 +1,13 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
+import { Dispatch } from 'redux';
+import { hot } from 'react-hot-loader';
 import styled, { ThemeProvider } from './styled-components';
 import { GlobalStyle, theme } from './styles';
 import { fontRegular } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
-import Api from './api';
 import Item from './api/interfaces/item';
-
-type Props = {};
-
-type State = {
-  items: Item[];
-  isLoading: boolean;
-  error: string;
-};
-
-class App extends React.Component<Props, State> {
-  constructor(props: Props, context: any) {
-    super(props, context);
-    this.state = {
-      items: [],
-      isLoading: false,
-      error: '',
-    };
-  }
-
-  public render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <Contianer>
-          <main>
-            <Title>Najnowsze</Title>
-            {this.state.isLoading && <div>Wczytywanie...</div>}
-            <ItemList items={this.state.items} />
-            <GlobalStyle />
-          </main>
-        </Contianer>
-      </ThemeProvider>
-    );
-  }
-
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    const api = new Api();
-
-    api
-      .getItems()
-      .then(res => {
-        const items = res.data.items;
-        this.setState({ items, isLoading: false });
-      })
-      .catch((err: Error) => {
-        this.setState({ error: "Can't get items" });
-      });
-  }
-}
+import { connect } from 'react-redux';
+import { loadItems } from './features/items/actions';
 
 const Contianer = styled.div`
   height: 100%;
@@ -68,4 +21,55 @@ const Title = styled('h1')`
   margin: 0 auto 30px -25px;
 `;
 
-export default hot(App);
+type Props = {
+  loadItems: () => void;
+  items: Item[];
+  loading: boolean;
+  error: string;
+};
+
+class App extends React.Component<Props> {
+  constructor(props: Props, context: any) {
+    super(props, context);
+  }
+
+  public render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <Contianer>
+          <main>
+            <Title>Najnowsze</Title>
+            {this.props.loading && <div>Wczytywanie...</div>}
+            <ItemList items={this.props.items} />
+            <GlobalStyle />
+          </main>
+        </Contianer>
+      </ThemeProvider>
+    );
+  }
+
+  componentDidMount() {
+    this.props.loadItems();
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    loadItems: () => dispatch(loadItems() as any),
+  };
+};
+
+const mapStateToProps = ({ itemsReducer }: any) => {
+  return {
+    items: itemsReducer.items,
+    loading: itemsReducer.loading,
+    error: itemsReducer.error,
+  };
+};
+
+const connectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+export default hot(module)(connectedApp);
