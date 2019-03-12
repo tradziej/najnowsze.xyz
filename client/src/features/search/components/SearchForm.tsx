@@ -20,24 +20,54 @@ const SearchInput = styled.input`
   padding-right: 15px;
   margin-left: -25px;
   margin-bottom: 25px;
-  outline: none;
 `;
 
 type Props = {
   searchTermChanged: (searchTerm: string) => void;
+  innerRef?: (el: HTMLSpanElement) => void;
 };
 
 class SearchForm extends React.Component<Props, {}> {
+  private inputRef: React.RefObject<HTMLInputElement>;
+
+  constructor(props: Props, context: any) {
+    super(props, context);
+    this.inputRef = React.createRef();
+  }
+
+  componentDidMount(): void {
+    window.addEventListener('keydown', e => this.handleKeydown(e));
+  }
+
+  componentWillUnmount(): void {
+    window.removeEventListener('keydown', this.handleKeydown);
+  }
+
   render() {
     return (
       <StyledDiv>
         <Icon />
         <SearchInput
           type="search"
+          ref={this.inputRef}
           onChange={e => this.props.searchTermChanged(e.target.value)}
         />
       </StyledDiv>
     );
+  }
+
+  handleKeydown(e: KeyboardEvent) {
+    if ((e.ctrlKey || e.metaKey) && e.keyCode === 70) {
+      e.preventDefault();
+
+      if (this.inputRef.current) {
+        this.inputRef.current.focus();
+      }
+
+      window.setTimeout(function() {
+        window.scrollTo(0, 0);
+      }, 1);
+    }
   }
 }
 
