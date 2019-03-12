@@ -8,6 +8,7 @@ import ItemList from './features/items/components/ItemList';
 import Item from './api/interfaces/item';
 import { connect } from 'react-redux';
 import { loadItems } from './features/items/actions';
+import SearchForm from './features/search/components/SearchForm';
 
 const Contianer = styled.div`
   height: 100%;
@@ -26,6 +27,7 @@ type Props = {
   items: Item[];
   loading: boolean;
   error: string;
+  searchTerm: string;
 };
 
 class App extends React.Component<Props> {
@@ -39,8 +41,9 @@ class App extends React.Component<Props> {
         <Contianer>
           <main>
             <Title>Najnowsze</Title>
+            <SearchForm />
             {this.props.loading && <div>Wczytywanie...</div>}
-            <ItemList items={this.props.items} />
+            <ItemList items={this.getFilteredItems()} />
             <GlobalStyle />
           </main>
         </Contianer>
@@ -51,6 +54,23 @@ class App extends React.Component<Props> {
   componentDidMount() {
     this.props.loadItems();
   }
+
+  getFilteredItems(): Item[] {
+    const { searchTerm, items } = this.props;
+
+    if (searchTerm === '') {
+      return items;
+    }
+
+    const filteredItems = items.filter(item => {
+      return (
+        item.title.toLowerCase().search(searchTerm.toLowerCase()) > -1 ||
+        item.link.toLocaleLowerCase().search(searchTerm.toLowerCase()) > -1
+      );
+    });
+
+    return filteredItems;
+  }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -59,11 +79,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const mapStateToProps = ({ itemsReducer }: any) => {
+const mapStateToProps = ({ itemsReducer, searchReducer }: any) => {
   return {
     items: itemsReducer.items,
     loading: itemsReducer.loading,
     error: itemsReducer.error,
+    searchTerm: searchReducer.searchTerm,
   };
 };
 
