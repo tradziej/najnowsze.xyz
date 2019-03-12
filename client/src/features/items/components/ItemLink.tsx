@@ -13,6 +13,7 @@ const Domain = styled.span`
 
 const ItemLink: React.StatelessComponent<Props> = ({ item }) => {
   const extractor = new DomainExtractor(item.link);
+  const title = item.title.replace(/&quot;/g, '"');
 
   return (
     <a
@@ -21,7 +22,7 @@ const ItemLink: React.StatelessComponent<Props> = ({ item }) => {
       href={item.link}
       title={item.description}
     >
-      {item.title} <Domain>({extractor.getDomain()})</Domain>
+      {title} <Domain>({extractor.getDomain()})</Domain>
     </a>
   );
 };
