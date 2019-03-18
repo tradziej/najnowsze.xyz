@@ -1,14 +1,15 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { hot } from 'react-hot-loader';
+import { connect } from 'react-redux';
 import styled, { ThemeProvider } from './styled-components';
 import { GlobalStyle, theme } from './styles';
 import { fontRegular } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
 import Item from './api/interfaces/item';
-import { connect } from 'react-redux';
 import { loadItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
+import DarkModeToggle from './features/settings/components/DarkModeToggle';
 
 const Contianer = styled.div`
   height: 100%;
@@ -20,6 +21,12 @@ const Title = styled('h1')`
   ${fontRegular};
   color: ${props => props.theme.colors.orange};
   margin: 0 auto 30px -25px;
+`;
+
+const NavBar = styled.div`
+  top: 0;
+  width: 100%;
+  display: flex;
 `;
 
 type Props = {
@@ -39,6 +46,9 @@ class App extends React.Component<Props> {
     return (
       <ThemeProvider theme={theme}>
         <Contianer>
+          <NavBar>
+            <DarkModeToggle />
+          </NavBar>
           <main>
             <Title>Najnowsze</Title>
             <SearchForm />

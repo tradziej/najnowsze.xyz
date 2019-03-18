@@ -11,8 +11,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    background: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.black};
     font-size: 1.250em;
 
     ${media.tablet`
@@ -22,6 +20,16 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     ${fontFamily};
+  }
+
+  body.light-mode {
+    background: ${props => props.theme.colors.white};
+    color: ${props => props.theme.colors.black};
+  }
+
+  body.dark-mode {
+    background: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.white};
   }
 
   strong {
