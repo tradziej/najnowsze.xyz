@@ -1,13 +1,17 @@
-import { colors } from './variables';
+import { Colors, lightColors, darkColors } from './variables';
 
 export interface Theme {
-  colors: { [key in keyof typeof colors]: string };
+  colors: Colors;
 }
 
 export interface ThemeProps {
   theme: Theme;
 }
 
-export const theme: Theme = {
-  colors,
+export const lightTheme: Theme = {
+  colors: lightColors,
+};
+
+export const darkTheme: Theme = {
+  colors: darkColors,
 };

@@ -15,7 +15,7 @@ const StyledLi = styled.li`
 
 const CommentsLink = styled.a`
   ${fontItalic};
-  color: ${({ theme }: ThemeProps) => theme.colors.grey};
+  color: ${({ theme }: ThemeProps) => theme.colors.foxtrot};
 `;
 
 const ItemListElement: React.StatelessComponent<Props> = ({ item }) => {

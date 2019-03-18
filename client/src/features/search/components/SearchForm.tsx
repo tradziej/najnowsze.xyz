@@ -10,11 +10,11 @@ const StyledDiv = styled.div`
 `;
 
 const SearchInput = styled.input`
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.bravo};
+  background-color: ${props => props.theme.colors.delta};
   font-size: 1.125em;
   width: 100%;
   height: 3.545455em;
-  background-color: #fff;
   border: none;
   padding-left: 65px;
   padding-right: 15px;

@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Domain = styled.span`
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.alfa};
 `;
 
 const ItemLink: React.StatelessComponent<Props> = ({ item }) => {

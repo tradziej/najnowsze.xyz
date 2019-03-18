@@ -23,13 +23,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body.light-mode {
-    background: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.black};
+    background: ${props => props.theme.colors.foxtrot};
+    color: ${props => props.theme.colors.charlie};
   }
 
   body.dark-mode {
-    background: ${props => props.theme.colors.black};
-    color: ${props => props.theme.colors.white};
+    background: ${props => props.theme.colors.charlie};
+    color: ${props => props.theme.colors.foxtrot};
   }
 
   strong {
@@ -38,12 +38,12 @@ export const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: ${props => props.theme.colors.blue};
-    border-bottom: 1px dotted ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.bravo};
+    border-bottom: 1px dotted ${props => props.theme.colors.charlie};
   }
 
   a:visited {
     text-decoration: none;
-    color: ${props => props.theme.colors.grey};
+    color: ${props => props.theme.colors.foxtrot};
   }
 `;

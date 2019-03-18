@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from './styled-components';
-import { GlobalStyle, theme } from './styles';
+import { GlobalStyle, lightTheme, darkTheme } from './styles';
 import { fontRegular } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
 import Item from './api/interfaces/item';
@@ -19,7 +19,7 @@ const Contianer = styled.div`
 
 const Title = styled('h1')`
   ${fontRegular};
-  color: ${props => props.theme.colors.orange};
+  color: ${props => props.theme.colors.alfa};
   margin: 0 auto 30px -25px;
 `;
 
@@ -35,6 +35,7 @@ type Props = {
   loading: boolean;
   error: string;
   searchTerm: string;
+  isDarkTheme: boolean;
 };
 
 class App extends React.Component<Props> {
@@ -44,7 +45,7 @@ class App extends React.Component<Props> {
 
   public render() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={this.props.isDarkTheme ? darkTheme : lightTheme}>
         <Contianer>
           <NavBar>
             <DarkModeToggle />
@@ -89,12 +90,17 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const mapStateToProps = ({ itemsReducer, searchReducer }: any) => {
+const mapStateToProps = ({
+  itemsReducer,
+  searchReducer,
+  settingsReducer,
+}: any) => {
   return {
     items: itemsReducer.items,
     loading: itemsReducer.loading,
     error: itemsReducer.error,
     searchTerm: searchReducer.searchTerm,
+    isDarkTheme: settingsReducer.darkMode,
   };
 };
 
