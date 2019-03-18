@@ -36,12 +36,12 @@ type Props = {
 class DarkModeToggle extends React.Component<Props, {}> {
   componentDidMount() {
     document.body.classList.toggle('dark-mode', this.props.isDarkMode);
-    document.body.classList.toggle('light-mode', this.props.isDarkMode);
+    document.body.classList.toggle('light-mode', !this.props.isDarkMode);
   }
 
   componentWillReceiveProps(nextProps: Props) {
     document.body.classList.toggle('dark-mode', nextProps.isDarkMode);
-    document.body.classList.toggle('light-mode', nextProps.isDarkMode);
+    document.body.classList.toggle('light-mode', !nextProps.isDarkMode);
   }
 
   render() {
