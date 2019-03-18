@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body.light-mode {
-    background: ${props => props.theme.colors.foxtrot};
+    background: #ffffff;
     color: ${props => props.theme.colors.charlie};
   }
 
