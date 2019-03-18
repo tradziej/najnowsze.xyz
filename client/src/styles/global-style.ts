@@ -25,11 +25,19 @@ export const GlobalStyle = createGlobalStyle`
   body.light-mode {
     background: #ffffff;
     color: ${props => props.theme.colors.charlie};
+    transition: background-color 0.3s ease;
   }
 
   body.dark-mode {
     background: ${props => props.theme.colors.charlie};
     color: ${props => props.theme.colors.foxtrot};
+
+    .dark-mode-toggle > button {
+      color: ${props => props.theme.colors.foxtrot};
+      &:last-child {
+        color: ${props => props.theme.colors.alfa};
+      }
+    }
   }
 
   strong {

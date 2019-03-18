@@ -13,11 +13,11 @@ const DarkModeToggleContainer = styled.div`
     font-size: 1.2em;
     background: none;
     border: none;
-    color: #ffe600;
+    color: ${props => props.theme.colors.alfa};
     cursor: pointer;
     transition: color 0.3s ease;
     &:last-child {
-      color: #666;
+      color: ${props => props.theme.colors.foxtrot};
     }
 
     &:focus {
@@ -46,7 +46,7 @@ class DarkModeToggle extends React.Component<Props, {}> {
 
   render() {
     return (
-      <DarkModeToggleContainer>
+      <DarkModeToggleContainer className="dark-mode-toggle">
         <button type="button" onClick={() => this.props.darkModeDisabled()}>
           ☀
         </button>
