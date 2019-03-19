@@ -61,7 +61,7 @@ const Modal = ({ title, open, closeModal, children }: Props) => {
     <ModalBackground open={open} onClick={closeModal}>
       <ModalContainer onClick={e => e.stopPropagation()}>
         <Close onClick={closeModal} />
-        {title && <ModalTitle>Settings</ModalTitle>}
+        {title && <ModalTitle>{title}</ModalTitle>}
         <ModalContent>{children}</ModalContent>
       </ModalContainer>
     </ModalBackground>
