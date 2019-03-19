@@ -6,6 +6,7 @@ export type SettingsAction = ActionType<typeof settings>;
 
 export type SettingsState = Readonly<{
   darkMode: boolean;
+  openLinksNewTab: boolean;
 }>;
 
 export default combineReducers<SettingsState, SettingsAction>({
@@ -19,6 +20,16 @@ export default combineReducers<SettingsState, SettingsAction>({
 
       case 'DARK_MODE_DISABLED':
         return false;
+
+      default:
+        return state;
+    }
+  },
+
+  openLinksNewTab: (state = true, action) => {
+    switch (action.type) {
+      case 'OPEN_LINKS_NEW_TAB_TOGGLED':
+        return !state;
 
       default:
         return state;
