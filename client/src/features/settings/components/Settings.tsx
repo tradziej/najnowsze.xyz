@@ -28,7 +28,11 @@ const Settings = () => {
       <StyledButton type="button">
         <StyledSettingsIcon onClick={() => setIsModalOpen(true)} />
       </StyledButton>
-      <Modal open={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+      <Modal
+        title="Settings"
+        open={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      >
         <div>
           <a
             target="_blank"

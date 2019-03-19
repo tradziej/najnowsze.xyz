@@ -25,17 +25,24 @@ const ModalContainer = styled.div`
   justify-self: center;
   background: white;
   max-width: ${props => props.theme.maxWidth};
+  min-width: 20vw;
   max-height: 80vh;
   position: relative;
-  padding: 2em;
+  padding: 0 2em 2em;
   box-shadow: 0 0 3em black;
+`;
+
+const ModalTitle = styled.div`
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 1.313em;
 `;
 
 const ModalContent = styled.div`
   padding-top: 15px;
 `;
 
-const Close = styled(Cross).attrs({ size: `2em` })`
+const Close = styled(Cross).attrs({ size: `1.5em` })`
   position: absolute;
   top: 0.5em;
   right: 0.4em;
@@ -43,16 +50,18 @@ const Close = styled(Cross).attrs({ size: `2em` })`
 `;
 
 type Props = {
+  title?: string;
   open: boolean;
   closeModal: () => void;
   children?: any;
 };
 
-const Modal = ({ open, closeModal, children }: Props) => {
+const Modal = ({ title, open, closeModal, children }: Props) => {
   return (
     <ModalBackground open={open} onClick={closeModal}>
       <ModalContainer onClick={e => e.stopPropagation()}>
         <Close onClick={closeModal} />
+        {title && <ModalTitle>Settings</ModalTitle>}
         <ModalContent>{children}</ModalContent>
       </ModalContainer>
     </ModalBackground>
