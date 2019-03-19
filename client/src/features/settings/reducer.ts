@@ -10,7 +10,7 @@ export type SettingsState = Readonly<{
 }>;
 
 export default combineReducers<SettingsState, SettingsAction>({
-  darkMode: (state = false, action) => {
+  darkMode: (state = true, action) => {
     switch (action.type) {
       case 'DARK_MODE_TOGGLED':
         return !state;
