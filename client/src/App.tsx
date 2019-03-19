@@ -10,6 +10,7 @@ import Item from './api/interfaces/item';
 import { loadItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
 import DarkModeToggle from './features/settings/components/DarkModeToggle';
+import Settings from './features/settings/components/Settings';
 
 const Contianer = styled.div`
   height: 100%;
@@ -49,6 +50,7 @@ class App extends React.Component<Props> {
         <Contianer>
           <NavBar>
             <DarkModeToggle />
+            <Settings />
           </NavBar>
           <main>
             <Title>Najnowsze</Title>
