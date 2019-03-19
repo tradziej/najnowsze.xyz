@@ -29,7 +29,15 @@ const Settings = () => {
         <StyledSettingsIcon onClick={() => setIsModalOpen(true)} />
       </StyledButton>
       <Modal open={isModalOpen} closeModal={() => setIsModalOpen(false)}>
-        <div>Hurray!</div>
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://twitter.com/tradziej"
+          >
+            Feedback
+          </a>
+        </div>
       </Modal>
     </Fragment>
   );
