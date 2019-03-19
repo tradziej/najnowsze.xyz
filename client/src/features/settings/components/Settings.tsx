@@ -37,12 +37,12 @@ const Settings = ({ isOpenLinksNewTab, openLinksSettingsToggled }: Props) => {
         <StyledSettingsIcon onClick={() => setIsModalOpen(true)} />
       </StyledButton>
       <Modal
-        title="Settings"
+        title="Ustawienia"
         open={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
       >
         <div>
-          Open links in new tab:{' '}
+          Linki w nowym oknie:{' '}
           <input
             type="checkbox"
             checked={isOpenLinksNewTab}
