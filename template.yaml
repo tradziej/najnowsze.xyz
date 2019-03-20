@@ -22,7 +22,7 @@ Resources:
             Path: /items
             Method: get
       Policies:
-      - DynamoDBCrudPolicy:
+      - DynamoDBReadPolicy:
           TableName: !Ref ItemsTable
       Environment:
         Variables:
