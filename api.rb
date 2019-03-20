@@ -8,8 +8,8 @@ def handler(event:, context:)
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.generate({
+    body: JSON.generate(
       items: Item.recent
-    })
+    )
   }
 end

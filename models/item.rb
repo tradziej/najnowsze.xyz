@@ -13,7 +13,7 @@ class Item
   string_attr :title
   string_attr :description
 
-  def as_json(options={})
+  def as_json(_options = {})
     {
       created_at: created_at,
       title: title,
@@ -52,13 +52,13 @@ class Item
   end
 
   def self.recent
-    self.yesterday + self.today
+    yesterday + today
   end
 
   if ENV['AWS_SAM_LOCAL']
     local_client = Aws::DynamoDB::Client.new(
       endpoint: 'http://host.docker.internal:8000'
     )
-    self.configure_client(client: local_client)
+    configure_client(client: local_client)
   end
 end

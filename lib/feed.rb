@@ -18,7 +18,8 @@ class Feed
     end
   end
 
- private
+  private
+
   def document
     Ox.default_options = {
       encoding: 'UTF-8'

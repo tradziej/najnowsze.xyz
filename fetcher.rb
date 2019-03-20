@@ -8,7 +8,7 @@ def handler(event:, context:)
     guid = item[:guid].split('/')[-1]
     time_guid = "#{time}-#{guid}"
     return if Item.find(date: date, time_guid: time_guid)
-    
+
     Item.new(
       date: date,
       time_guid: time_guid,
