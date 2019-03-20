@@ -12,7 +12,7 @@ Resources:
   ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: api.handler
+      Handler: api.items_handler
       Runtime: ruby2.5
       Timeout: 300
       Events:

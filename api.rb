@@ -1,7 +1,7 @@
 require 'json'
 require_relative 'models/item'
 
-def handler(event:, context:)
+def items_handler(event:, context:)
   {
     statusCode: 200,
     headers: {
