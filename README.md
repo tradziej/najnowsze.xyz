@@ -47,6 +47,15 @@ aws dynamodb create-table --endpoint-url http://localhost:8000 --table-name item
 ```
 
 ```
+aws dynamodb create-table \
+    --endpoint-url http://localhost:8000 \
+    --table-name sessions-table \
+    --attribute-definitions AttributeName=token,AttributeType=S \
+    --key-schema AttributeName=token,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+```
+
+```
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
 

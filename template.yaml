@@ -24,9 +24,12 @@ Resources:
       Policies:
       - DynamoDBReadPolicy:
           TableName: !Ref ItemsTable
+      - DynamoDBReadPolicy:
+          TableName: !Ref SessionsTable
       Environment:
         Variables:
           ITEMS_TABLE: !Ref ItemsTable
+          SESSIONS_TABLE: !Ref SessionsTable
 
   FetcherFunction:
     Type: AWS::Serverless::Function
@@ -60,6 +63,19 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
 
+  SessionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions: 
+        - 
+          AttributeName: "token"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "token"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+
   ScheduledRule:
     Type: AWS::Events::Rule
     Properties:
@@ -91,6 +107,13 @@ Outputs:
     Value:
       Fn::GetAtt:
       - ItemsTable
+      - Arn
+
+  SessionsTable:
+    Description: "Sessions Dynamo DB table"
+    Value:
+      Fn::GetAtt:
+      - SessionsTable
       - Arn
 
   FetcherFunction:

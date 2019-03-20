@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    artii (2.1.2)
     aws-eventstream (1.0.1)
     aws-partitions (1.140.0)
     aws-record (2.3.0)
@@ -45,6 +46,8 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    xkpassword (0.3.1)
+      artii (~> 2.1)
 
 PLATFORMS
   ruby
@@ -56,6 +59,7 @@ DEPENDENCIES
   rspec
   vcr
   webmock
+  xkpassword
 
 BUNDLED WITH
    1.17.3
