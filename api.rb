@@ -35,7 +35,9 @@ def response(status_code: 200, body:, headers: nil)
     statusCode: status_code,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'X-Session-Token, X-Readed-To',
+      'Access-Control-Expose-Headers': 'X-Session-Token, X-Readed-To'
     }.merge!(custom_headers),
     body: JSON.generate(body)
   }
