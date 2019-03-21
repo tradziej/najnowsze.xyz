@@ -24,7 +24,7 @@ Resources:
       Policies:
       - DynamoDBReadPolicy:
           TableName: !Ref ItemsTable
-      - DynamoDBReadPolicy:
+      - DynamoDBCrudPolicy:
           TableName: !Ref SessionsTable
       Environment:
         Variables:
@@ -44,7 +44,7 @@ Resources:
             Path: /readed
             Method: put
       Policies:
-      - DynamoDBReadPolicy:
+      - DynamoDBCrudPolicy:
           TableName: !Ref SessionsTable
       Environment:
         Variables:
