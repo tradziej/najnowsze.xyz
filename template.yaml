@@ -4,7 +4,7 @@ Description: "wykop.pl lite client"
 Globals:
   Api:
     Cors:
-      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowMethods: "'GET,POST,PUT,OPTIONS'"
       AllowHeaders: "'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Session-Token,X-Read-To'"
       AllowOrigin: "'*'"
 
