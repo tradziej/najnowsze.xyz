@@ -16,7 +16,7 @@ def readed_handler(event:, context:)
 end
 
 def current_session(headers)
-  token = headers['X-Session-Token']
+  token = headers['x-session-token'] || headers['X-Session-Token']
   session ||= Session.find_or_create(token)
   session
 end
