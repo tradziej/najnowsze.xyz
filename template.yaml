@@ -9,7 +9,7 @@ Globals:
       AllowOrigin: "'*'"
 
 Resources:
-  ApiFunction:
+  ApiGetItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: api.items_handler
@@ -122,10 +122,10 @@ Outputs:
       - FetcherFunction
       - Arn
 
-  ApiFunction:
+  ApiGetItemsFunction:
     Value:
       Fn::GetAtt:
-      - ApiFunction
+      - ApiGetItemsFunction
       - Arn
 
   ApiUrl:

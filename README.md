@@ -66,7 +66,7 @@ sam local invoke --env-vars env.json --no-event FetcherFunction
 
 ### API
 ```
-sam local invoke --env-vars env.json --no-event ApiFunction
+sam local invoke --env-vars env.json --no-event ApiGetItemsFunction
 ```
 
 ```
