@@ -1,11 +1,12 @@
-RSpec.shared_examples 'headers examples' do
+RSpec.shared_examples 'headers examples' do |parameter|
+  let(:handler) { parameter }
   let(:sessionDouble) { Struct.new(:token, :readed_to) }
   let(:session) { sessionDouble.new('faketoken', nil) }
 
   it 'returns correct headers' do
-    expect(Session).to receive(:find_or_create).with(nil).and_return(session)
+    allow(Session).to receive(:find_or_create).and_return(session)
 
-    response = items_handler(event: event, context: nil)
+    response = send(handler, event: event, context: nil)
 
     expect(response[:headers]).to include(:'X-Session-Token', :'X-Readed-To')
     expect(response[:headers][:'Content-Type']).to eq('application/json')

@@ -77,6 +77,10 @@ sam local start-api --env-vars env.json
 curl -i -H "Content-Type: application/json" http://127.0.0.1:3000/items
 ```
 
+```
+curl -i -H "Content-Type: application/json" -H "X-Session-Token: colognedegreespin" -X PUT http://127.0.0.1:3000/readed
+```
+
 ## Testing
 ```
 rspec spec

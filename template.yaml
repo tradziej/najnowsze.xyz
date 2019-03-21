@@ -31,6 +31,25 @@ Resources:
           ITEMS_TABLE: !Ref ItemsTable
           SESSIONS_TABLE: !Ref SessionsTable
 
+  ApiMarkAsReadedFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: api.readed_handler
+      Runtime: ruby2.5
+      Timeout: 300
+      Events:
+        Request:
+          Type: Api
+          Properties:
+            Path: /readed
+            Method: put
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: !Ref SessionsTable
+      Environment:
+        Variables:
+          SESSIONS_TABLE: !Ref SessionsTable
+
   FetcherFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -126,6 +145,12 @@ Outputs:
     Value:
       Fn::GetAtt:
       - ApiGetItemsFunction
+      - Arn
+
+  ApiMarkAsReadedFunction:
+    Value:
+      Fn::GetAtt:
+      - ApiMarkAsReadedFunction
       - Arn
 
   ApiUrl:

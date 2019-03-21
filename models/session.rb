@@ -11,6 +11,12 @@ class Session
   integer_attr :read_count
   string_attr :settings
 
+  def mark_as_readed!
+    self.readed_to = Time.now
+    self.read_count += 1
+    save!
+  end
+
   class << self
     def find_or_create(token)
       record = find(token: token) unless token.to_s.empty?

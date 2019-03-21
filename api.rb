@@ -6,6 +6,15 @@ def items_handler(event:, context:)
   response(body: { items: Item.recent }, headers: event['headers'])
 end
 
+def readed_handler(event:, context:)
+  headers = event['headers']
+  if current_session(headers).mark_as_readed!
+    return response(body: { status: :ok }, status_code: 200, headers: headers)
+  end
+
+  response(body: { error: 'Error on update' }, status_code: 400, headers: headers)
+end
+
 def current_session(headers)
   token = headers['X-Session-Token']
   session ||= Session.find_or_create(token)

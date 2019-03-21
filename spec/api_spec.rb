@@ -23,7 +23,7 @@ describe 'API' do
       before do
         expect(Item).to receive(:recent).and_return([])
       end
-      include_examples 'headers examples'
+      include_examples 'headers examples', 'items_handler'
     end
 
     it 'returns array of items' do
@@ -33,6 +33,31 @@ describe 'API' do
 
       response = items_handler(event: event, context: nil)
       expect(response[:body]).to eq(JSON.generate(items: items))
+    end
+  end
+
+  describe '#readed_handler' do
+    let(:event) do
+      {
+        'httpMethod' => 'PUT', 'body' => nil, 'resource' => '/readed', 'requestContext' => {
+          'resourceId' => '123456', 'apiId' => '1234567890', 'resourcePath' => '/readed', 'httpMethod' => 'PUT', 'requestId' => 'c6af9ac6-7b61-11e6-9a41-93e8deadbeef', 'accountId' => '123456789012', 'stage' => 'prod', 'identity' => {
+            'apiKey' => nil, 'userArn' => nil, 'cognitoAuthenticationType' => nil, 'caller' => nil, 'userAgent' => 'Custom User Agent String', 'user' => nil, 'cognitoIdentityPoolId' => nil, 'cognitoAuthenticationProvider' => nil, 'sourceIp' => '127.0.0.1', 'accountId' => nil
+          }, 'extendedRequestId' => nil, 'path' => '/readed'
+        }, 'queryStringParameters' => nil, 'headers' => {
+          'Host' => '127.0.0.1:3000', 'User-Agent' => 'curl/7.54.0', 'Accept' => '*/*', 'Content-Type' => 'application/json', 'X-Session-Token' => 'faketoken', 'X-Forwarded-Proto' => 'http', 'X-Forwarded-Port' => '3000'
+        }, 'pathParameters' => nil, 'stageVariables' => nil, 'path' => '/readed', 'isBase64Encoded' => false
+      }
+    end
+
+    describe 'headers' do
+      include_examples 'headers examples', 'readed_handler' do
+        let(:sessionDouble) { Struct.new(:token, :readed_to) }
+        let(:session) do
+          s = sessionDouble.new('faketoken', nil)
+          allow(s).to receive(:mark_as_readed!).and_return(false)
+          s
+        end
+      end
     end
   end
 end
