@@ -14,6 +14,11 @@ export interface OpenLinksNewTabToggled {
   type: 'OPEN_LINKS_NEW_TAB_TOGGLED';
 }
 
+export interface SessionTokenChanged {
+  type: 'SESSION_TOKEN_CHANGED';
+  sessionToken: string;
+}
+
 export const darkModeToggled = (): DarkModeToggled => ({
   type: 'DARK_MODE_TOGGLED',
 });
@@ -28,4 +33,11 @@ export const darkModeDisabled = (): DarkModeDisabled => ({
 
 export const openLinksSettingsToggled = (): OpenLinksNewTabToggled => ({
   type: 'OPEN_LINKS_NEW_TAB_TOGGLED',
+});
+
+export const sessionTokenChanged = (
+  sessionToken: string
+): SessionTokenChanged => ({
+  type: 'SESSION_TOKEN_CHANGED',
+  sessionToken,
 });
