@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Dispatch } from 'redux';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
@@ -54,9 +54,14 @@ class App extends React.Component<Props> {
           </NavBar>
           <main>
             <Title>Najnowsze</Title>
-            <SearchForm />
-            {this.props.loading && <div>Wczytywanie...</div>}
-            <ItemList items={this.getFilteredItems()} />
+            {this.props.loading ? (
+              <div>Wczytywanie...</div>
+            ) : (
+              <Fragment>
+                <SearchForm />
+                <ItemList items={this.getFilteredItems()} />
+              </Fragment>
+            )}
             <GlobalStyle />
           </main>
         </Contianer>
