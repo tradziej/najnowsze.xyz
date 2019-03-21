@@ -6,9 +6,9 @@ def items_handler(event:, context:)
   response(body: { items: Item.recent }, headers: event['headers'])
 end
 
-def readed_handler(event:, context:)
+def read_handler(event:, context:)
   headers = event['headers']
-  if current_session(headers).mark_as_readed!
+  if current_session(headers).mark_as_read!
     return response(body: { status: :ok }, status_code: 200, headers: headers)
   end
 
@@ -27,7 +27,7 @@ def response(status_code: 200, body:, headers: nil)
     session = current_session(headers)
     custom_headers = {
       'X-Session-Token': session.token,
-      'X-Readed-To': session.readed_to
+      'X-Read-To': session.read_to
     }
   end
 
@@ -36,8 +36,8 @@ def response(status_code: 200, body:, headers: nil)
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'X-Session-Token, X-Readed-To',
-      'Access-Control-Expose-Headers': 'X-Session-Token, X-Readed-To'
+      'Access-Control-Allow-Headers': 'X-Session-Token, X-Read-To',
+      'Access-Control-Expose-Headers': 'X-Session-Token, X-Read-To'
     }.merge!(custom_headers),
     body: JSON.generate(body)
   }

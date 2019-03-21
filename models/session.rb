@@ -7,12 +7,12 @@ class Session
   set_table_name ENV['SESSIONS_TABLE']
 
   string_attr :token, hash_key: true
-  datetime_attr :readed_to
+  datetime_attr :read_to
   integer_attr :read_count
   string_attr :settings
 
-  def mark_as_readed!
-    self.readed_to = Time.now
+  def mark_as_read!
+    self.read_to = Time.now
     self.read_count += 1
     save!
   end

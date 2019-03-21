@@ -5,7 +5,7 @@ Globals:
   Api:
     Cors:
       AllowMethods: "'GET,POST,OPTIONS'"
-      AllowHeaders: "'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Session-Token,X-Readed-To'"
+      AllowHeaders: "'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-Session-Token,X-Read-To'"
       AllowOrigin: "'*'"
 
 Resources:
@@ -31,17 +31,17 @@ Resources:
           ITEMS_TABLE: !Ref ItemsTable
           SESSIONS_TABLE: !Ref SessionsTable
 
-  ApiMarkAsReadedFunction:
+  ApiMarkAsReadFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: api.readed_handler
+      Handler: api.read_handler
       Runtime: ruby2.5
       Timeout: 300
       Events:
         Request:
           Type: Api
           Properties:
-            Path: /readed
+            Path: /read
             Method: put
       Policies:
       - DynamoDBCrudPolicy:
@@ -147,10 +147,10 @@ Outputs:
       - ApiGetItemsFunction
       - Arn
 
-  ApiMarkAsReadedFunction:
+  ApiMarkAsReadFunction:
     Value:
       Fn::GetAtt:
-      - ApiMarkAsReadedFunction
+      - ApiMarkAsReadFunction
       - Arn
 
   ApiUrl:

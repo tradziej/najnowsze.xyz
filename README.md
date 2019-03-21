@@ -78,7 +78,7 @@ curl -i -H "Content-Type: application/json" http://127.0.0.1:3000/items
 ```
 
 ```
-curl -i -H "Content-Type: application/json" -H "X-Session-Token: colognedegreespin" -X PUT http://127.0.0.1:3000/readed
+curl -i -H "Content-Type: application/json" -H "X-Session-Token: colognedegreespin" -X PUT http://127.0.0.1:3000/read
 ```
 
 ## Testing
