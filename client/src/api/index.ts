@@ -1,6 +1,8 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import Item from './interfaces/item';
 
+type Response = { status: 'ok' } | { error: string };
+
 class Api {
   private axios: AxiosInstance;
 
@@ -16,6 +18,10 @@ class Api {
 
   public getItems(reqConfig?: AxiosRequestConfig) {
     return this.axios.get<{ items: Item[] }>('/items', reqConfig);
+  }
+
+  public markAsRead(reqConfig?: AxiosRequestConfig) {
+    return this.axios.put<Response>('/read', null, reqConfig);
   }
 }
 

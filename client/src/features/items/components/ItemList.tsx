@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ItemListElement from './ItemListElement';
 import Item from '../../../api/interfaces/item';
+import MarkAsReadButton from './MarkAsReadButton';
 
 type Props = {
   items: Item[];
@@ -12,7 +13,13 @@ const ItemList: React.StatelessComponent<Props> = props => {
     <ItemListElement key={i.toString()} item={val} />
   ));
 
-  return <ol>{elements}</ol>;
+  return (
+    <Fragment>
+      <MarkAsReadButton />
+      <ol>{elements}</ol>
+      <MarkAsReadButton />
+    </Fragment>
+  );
 };
 
 export default ItemList;

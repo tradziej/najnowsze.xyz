@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ActionType } from 'typesafe-actions';
+import { ActionType, getType } from 'typesafe-actions';
 import * as settings from './actions';
 
 export type SettingsAction = ActionType<typeof settings>;
@@ -8,6 +8,7 @@ export type SettingsState = Readonly<{
   darkMode: boolean;
   openLinksNewTab: boolean;
   sessionToken: string;
+  readTo: string;
 }>;
 
 export default combineReducers<SettingsState, SettingsAction>({
@@ -41,6 +42,16 @@ export default combineReducers<SettingsState, SettingsAction>({
     switch (action.type) {
       case 'SESSION_TOKEN_CHANGED':
         return action.sessionToken;
+
+      default:
+        return state;
+    }
+  },
+
+  readTo: (state = '', action) => {
+    switch (action.type) {
+      case getType(settings.markItemsAsReadAsync.success):
+        return action.payload;
 
       default:
         return state;
