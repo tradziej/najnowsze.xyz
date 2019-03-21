@@ -9,3 +9,5 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock
 end
+
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
