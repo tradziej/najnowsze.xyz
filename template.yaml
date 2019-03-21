@@ -129,5 +129,5 @@ Outputs:
       - Arn
 
   ApiUrl:
-    Description: "API Gateway endpoint URL for geting items"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/items"
+    Description: "Gateway endpoint for JSON API"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
