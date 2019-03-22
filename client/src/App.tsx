@@ -6,6 +6,8 @@ import styled, { ThemeProvider } from './styled-components';
 import { GlobalStyle, lightTheme, darkTheme } from './styles';
 import { fontRegular } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
+import UnreadItemList from './features/items/components/UnreadItemList';
+import ReadItemList from './features/items/components/ReadItemList';
 import Item from './api/interfaces/item';
 import { loadItems, refreshItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
@@ -34,9 +36,9 @@ const NavBar = styled.div`
 type Props = {
   loadItems: () => void;
   refreshItems: () => void;
-  items: Item[];
   unreadItems: Item[];
   readItems: Item[];
+  filteredItems: Item[];
   loading: boolean;
   error: string;
   searchTerm: string;
@@ -52,6 +54,8 @@ class App extends React.Component<Props> {
   }
 
   public render() {
+    const { filteredItems, unreadItems, readItems, searchTerm } = this.props;
+
     return (
       <ThemeProvider theme={this.props.isDarkTheme ? darkTheme : lightTheme}>
         <Contianer>
@@ -66,10 +70,14 @@ class App extends React.Component<Props> {
             ) : (
               <Fragment>
                 <SearchForm />
-                <ItemList
-                  unreadItems={this.props.readItems}
-                  readItems={this.props.unreadItems}
-                />
+                {searchTerm !== '' ? (
+                  <ItemList items={filteredItems} />
+                ) : (
+                  <Fragment>
+                    <UnreadItemList items={unreadItems} />
+                    <ReadItemList items={readItems} />
+                  </Fragment>
+                )}
               </Fragment>
             )}
             <GlobalStyle />
@@ -88,23 +96,6 @@ class App extends React.Component<Props> {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-
-  getFilteredItems(): Item[] {
-    const { searchTerm, items } = this.props;
-
-    if (searchTerm === '') {
-      return items;
-    }
-
-    const filteredItems = items.filter(item => {
-      return (
-        item.title.toLowerCase().search(searchTerm.toLowerCase()) > -1 ||
-        item.link.toLocaleLowerCase().search(searchTerm.toLowerCase()) > -1
-      );
-    });
-
-    return filteredItems;
-  }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -116,9 +107,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    items: state.itemsReducer.items,
     unreadItems: selectors.unreadItemsList(state),
     readItems: selectors.readItemsList(state),
+    filteredItems: selectors.filteredItemsList(state),
     loading: state.itemsReducer.loading,
     error: state.itemsReducer.error,
     searchTerm: state.searchReducer.searchTerm,
