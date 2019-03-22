@@ -52,7 +52,7 @@ class Item
   end
 
   def self.recent
-    yesterday + today
+    today + yesterday
   end
 
   if ENV['AWS_SAM_LOCAL']
