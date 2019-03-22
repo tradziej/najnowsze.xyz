@@ -16,6 +16,7 @@ export const darkColors = {
   charlie: '#222831',
   delta: '#393e46',
   foxtrot: '#393e46',
+  golf: '#222831',
 };
 
 export const lightColors = {
@@ -24,6 +25,7 @@ export const lightColors = {
   charlie: '#2C3E50',
   delta: '#fafafa',
   foxtrot: '#a9a9a9',
+  golf: '#ffffff',
 };
 
 export const fontFamily = `font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif`;

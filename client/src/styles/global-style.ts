@@ -20,16 +20,15 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     ${fontFamily};
+    background: ${props => props.theme.colors.golf};
   }
 
   body.light-mode {
-    background: #ffffff;
     color: ${props => props.theme.colors.charlie};
     transition: background-color 0.3s ease;
   }
 
   body.dark-mode {
-    background: ${props => props.theme.colors.charlie};
     color: ${props => props.theme.colors.foxtrot};
 
     .dark-mode-toggle > button {
