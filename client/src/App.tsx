@@ -39,6 +39,7 @@ type Props = {
   unreadItems: Item[];
   readItems: Item[];
   filteredItems: Item[];
+  unreadItemsCount: number;
   loading: boolean;
   error: string;
   searchTerm: string;
@@ -93,6 +94,15 @@ class App extends React.Component<Props> {
     this.interval = setInterval(() => this.props.refreshItems(), 120000);
   }
 
+  componentWillUpdate(nextProps: Props) {
+    const { unreadItemsCount } = nextProps;
+    const title = 'Najnowsze wpisy z wykop.pl | najnowsze.xyz';
+    document.title = title;
+    if (unreadItemsCount > 0) {
+      document.title = `(${unreadItemsCount}) ${title}`;
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
@@ -110,6 +120,7 @@ const mapStateToProps = (state: any) => {
     unreadItems: selectors.unreadItemsList(state),
     readItems: selectors.readItemsList(state),
     filteredItems: selectors.filteredItemsList(state),
+    unreadItemsCount: selectors.unreadItemsCount(state),
     loading: state.itemsReducer.loading,
     error: state.itemsReducer.error,
     searchTerm: state.searchReducer.searchTerm,

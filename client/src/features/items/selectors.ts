@@ -29,6 +29,11 @@ export const unreadItemsList = createSelector(
   (items, readTo) => items.filter(item => item.created_at > readTo)
 );
 
+export const unreadItemsCount = createSelector(
+  unreadItemsList,
+  items => items.length
+);
+
 const searchTerm = createSelector(
   search,
   state => state.searchTerm
