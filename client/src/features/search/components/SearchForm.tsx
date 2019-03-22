@@ -18,7 +18,6 @@ const SearchInput = styled.input`
   border: none;
   padding-left: 65px;
   padding-right: 15px;
-  margin-left: -25px;
   outline-color: ${props => props.theme.colors.alfa};
 `;
 

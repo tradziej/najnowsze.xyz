@@ -5,6 +5,7 @@ import search from './search.svg';
 const Image = styled.img`
   position: absolute;
   top: 22px;
+  left: 25px;
   width: 32px;
   height: 32px;
 `;

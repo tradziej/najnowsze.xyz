@@ -21,7 +21,7 @@ const Contianer = styled.div`
 const Title = styled('h1')`
   ${fontRegular};
   color: ${props => props.theme.colors.alfa};
-  margin: 0 auto 30px -25px;
+  margin: 0 auto 30px;
 `;
 
 const NavBar = styled.div`

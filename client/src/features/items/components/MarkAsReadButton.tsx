@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   width: 100%;
   height: 3.545455em;
   padding-right: 15px;
-  margin: 25px -25px 25px;
+  margin: 25px 0;
 `;
 
 type Props = {
