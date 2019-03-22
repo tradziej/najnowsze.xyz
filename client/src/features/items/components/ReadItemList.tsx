@@ -39,6 +39,10 @@ type Props = {
 };
 
 const ReadItemList: React.StatelessComponent<Props> = ({ items }) => {
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
     <Fragment>
       <ReadedElementsIndicator>Przeczytane</ReadedElementsIndicator>

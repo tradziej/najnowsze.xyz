@@ -8,6 +8,10 @@ type Props = {
 };
 
 const UnreadItemList: React.StatelessComponent<Props> = ({ items }) => {
+  if (items.length === 0) {
+    return null;
+  }
+
   return (
     <Fragment>
       <MarkAsReadButton />
