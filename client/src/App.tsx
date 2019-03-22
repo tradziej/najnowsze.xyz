@@ -7,7 +7,7 @@ import { GlobalStyle, lightTheme, darkTheme } from './styles';
 import { fontRegular } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
 import Item from './api/interfaces/item';
-import { loadItems } from './features/items/actions';
+import { loadItems, refreshItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
 import DarkModeToggle from './features/settings/components/DarkModeToggle';
 import Settings from './features/settings/components/Settings';
@@ -32,6 +32,7 @@ const NavBar = styled.div`
 
 type Props = {
   loadItems: () => void;
+  refreshItems: () => void;
   items: Item[];
   loading: boolean;
   error: string;
@@ -40,8 +41,11 @@ type Props = {
 };
 
 class App extends React.Component<Props> {
+  interval: number;
+
   constructor(props: Props, context: any) {
     super(props, context);
+    this.interval = 0;
   }
 
   public render() {
@@ -71,6 +75,12 @@ class App extends React.Component<Props> {
 
   componentDidMount() {
     this.props.loadItems();
+
+    this.interval = setInterval(() => this.props.refreshItems(), 120000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   getFilteredItems(): Item[] {
@@ -94,6 +104,7 @@ class App extends React.Component<Props> {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     loadItems: () => dispatch(loadItems() as any),
+    refreshItems: () => dispatch(refreshItems() as any),
   };
 };
 

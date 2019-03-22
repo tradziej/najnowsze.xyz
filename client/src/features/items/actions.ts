@@ -28,3 +28,21 @@ export const loadItems = () => (
       return dispatch(loadItemsAsync.failure(Error("Can't get items")));
     });
 };
+
+export const refreshItems = () => (
+  dispatch: Dispatch<AnyAction>,
+  getState: any
+) => {
+  const api = new Api();
+  const { sessionToken } = getState().settingsReducer;
+  api
+    .getItems({ headers: { 'X-Session-Token': sessionToken } })
+    .then(res => {
+      dispatch(sessionTokenChanged(res.headers['x-session-token']));
+      const items = res.data.items;
+      return dispatch(loadItemsAsync.success(items));
+    })
+    .catch((err: Error) => {
+      return dispatch(loadItemsAsync.failure(Error("Can't get items")));
+    });
+};
