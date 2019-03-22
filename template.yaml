@@ -98,7 +98,7 @@ Resources:
   ScheduledRule:
     Type: AWS::Events::Rule
     Properties:
-      ScheduleExpression: rate(10 minutes)
+      ScheduleExpression: rate(2 minutes)
       State: ENABLED
       Targets:
         -
