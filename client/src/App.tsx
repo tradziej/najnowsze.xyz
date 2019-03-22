@@ -11,6 +11,7 @@ import { loadItems, refreshItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
 import DarkModeToggle from './features/settings/components/DarkModeToggle';
 import Settings from './features/settings/components/Settings';
+import * as selectors from './features/items/selectors';
 
 const Contianer = styled.div`
   height: 100%;
@@ -34,6 +35,8 @@ type Props = {
   loadItems: () => void;
   refreshItems: () => void;
   items: Item[];
+  unreadItems: Item[];
+  readItems: Item[];
   loading: boolean;
   error: string;
   searchTerm: string;
@@ -63,7 +66,10 @@ class App extends React.Component<Props> {
             ) : (
               <Fragment>
                 <SearchForm />
-                <ItemList items={this.getFilteredItems()} />
+                <ItemList
+                  unreadItems={this.props.readItems}
+                  readItems={this.props.unreadItems}
+                />
               </Fragment>
             )}
             <GlobalStyle />
@@ -108,17 +114,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const mapStateToProps = ({
-  itemsReducer,
-  searchReducer,
-  settingsReducer,
-}: any) => {
+const mapStateToProps = (state: any) => {
   return {
-    items: itemsReducer.items,
-    loading: itemsReducer.loading,
-    error: itemsReducer.error,
-    searchTerm: searchReducer.searchTerm,
-    isDarkTheme: settingsReducer.darkMode,
+    items: state.itemsReducer.items,
+    unreadItems: selectors.unreadItemsList(state),
+    readItems: selectors.readItemsList(state),
+    loading: state.itemsReducer.loading,
+    error: state.itemsReducer.error,
+    searchTerm: state.searchReducer.searchTerm,
+    isDarkTheme: state.settingsReducer.darkMode,
   };
 };
 
