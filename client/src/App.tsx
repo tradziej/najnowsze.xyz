@@ -3,8 +3,9 @@ import { Dispatch } from 'redux';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from './styled-components';
+import media from './styles/media';
 import { GlobalStyle, lightTheme, darkTheme } from './styles';
-import { fontRegular } from './styles/variables';
+import { fontMedium } from './styles/variables';
 import ItemList from './features/items/components/ItemList';
 import UnreadItemList from './features/items/components/UnreadItemList';
 import ReadItemList from './features/items/components/ReadItemList';
@@ -17,14 +18,19 @@ import * as selectors from './features/items/selectors';
 
 const Contianer = styled.div`
   height: 100%;
-  margin: 0 50px 50px;
+  margin: 0 10px 10px;
   padding-top: 20px;
+
+  ${media.tablet`
+    margin: 0 20px 20px;
+  `};
 `;
 
 const Title = styled('h1')`
-  ${fontRegular};
+  ${fontMedium};
   color: ${props => props.theme.colors.alfa};
   margin: 0 auto 30px;
+  text-align: center;
 `;
 
 const NavBar = styled.div`

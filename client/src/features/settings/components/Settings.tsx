@@ -7,12 +7,10 @@ import Modal from './Modal';
 import { openLinksSettingsToggled } from '../actions';
 
 const StyledButton = styled.button`
-  font-size: 1.2em;
+  font-size: 1.125em;
   background: none;
   border: none;
   cursor: pointer;
-  width: 25px;
-  height: 25px;
 
   &:focus {
     outline: none;
@@ -21,6 +19,8 @@ const StyledButton = styled.button`
 
 const StyledSettingsIcon = styled(SettingsIcon)`
   color: ${props => props.theme.colors.alfa};
+  width: 25px;
+  height: 25px;
 `;
 
 type Props = {

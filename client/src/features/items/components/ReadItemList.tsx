@@ -10,8 +10,7 @@ const ReadedElementsIndicator = styled.div`
   background-color: ${props => props.theme.colors.delta};
   font-size: 1.125em;
   width: 100%;
-  height: 3.545455em;
-  padding-right: 15px;
+  height: 3.125em;
   margin-top: 25px;
   text-align: center;
   line-height: 70px;

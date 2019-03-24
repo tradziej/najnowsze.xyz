@@ -53,4 +53,13 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: ${props => props.theme.colors.foxtrot};
   }
+
+  textarea,
+  input[type="search"],
+  input[type="text"],
+  input[type="button"],
+  input[type="submit"] {
+      -webkit-appearance: none;
+      border-radius: 0;
+  }
 `;

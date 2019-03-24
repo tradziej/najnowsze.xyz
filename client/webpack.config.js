@@ -32,17 +32,6 @@ module.exports = (env = { mode: 'production' }) => {
             enforce: 'pre',
             loader: 'eslint-loader',
           },
-          {
-            test: /\.(svg)$/i,
-            use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 10000,
-                },
-              },
-            ],
-          },
         ],
       },
       resolve: { extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'] },

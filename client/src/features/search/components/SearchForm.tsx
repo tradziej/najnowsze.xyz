@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import styled from '../../../styled-components';
-import Icon from './Icon';
 import { connect } from 'react-redux';
 import { searchTermChanged } from '../actions';
+import { Search as SearchIcon } from 'styled-icons/octicons/Search';
 
 const StyledDiv = styled.div`
   position: relative;
@@ -14,11 +14,20 @@ const SearchInput = styled.input`
   background-color: ${props => props.theme.colors.delta};
   font-size: 1.125em;
   width: 100%;
-  height: 3.545455em;
+  height: 3.125em;
   border: none;
   padding-left: 65px;
   padding-right: 15px;
   outline-color: ${props => props.theme.colors.alfa};
+`;
+
+const StyledSearchIcon = styled(SearchIcon)`
+  color: ${props => props.theme.colors.alfa};
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  height: 32px;
 `;
 
 type Props = {
@@ -45,7 +54,7 @@ class SearchForm extends React.Component<Props, {}> {
   render() {
     return (
       <StyledDiv>
-        <Icon />
+        <StyledSearchIcon />
         <SearchInput
           type="search"
           ref={this.inputRef}

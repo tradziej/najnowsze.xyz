@@ -9,7 +9,7 @@ const ToggleControl = styled.span`
 `;
 
 const ToggleInput = styled.input`
-  width: 40px;
+  width: 30px;
   height: 10px;
   background: #555;
   position: relative;
@@ -22,7 +22,7 @@ const ToggleInput = styled.input`
   outline: none;
 
   &:checked + label {
-    left: 30px;
+    left: 20px;
   }
 
   &:focus-visible {
