@@ -13,6 +13,7 @@ def handler(event:, context:)
       date: date,
       time_guid: time_guid,
       created_at: item[:date],
+      promoted_at: DateTime.now,
       guid: item[:guid],
       link: item[:link],
       title: item[:title],

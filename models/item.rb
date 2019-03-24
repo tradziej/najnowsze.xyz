@@ -7,6 +7,7 @@ class Item
 
   string_attr :date, hash_key: true
   string_attr :time_guid, range_key: true
+  datetime_attr :promoted_at
   string_attr :guid
   datetime_attr :created_at
   string_attr :link
@@ -16,6 +17,7 @@ class Item
   def as_json(_options = {})
     {
       created_at: created_at,
+      promoted_at: promoted_at,
       title: title,
       description: description,
       guid: guid,
