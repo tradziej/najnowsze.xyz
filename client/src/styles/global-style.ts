@@ -25,7 +25,6 @@ export const GlobalStyle = createGlobalStyle`
 
   body.light-mode {
     color: ${props => props.theme.colors.charlie};
-    transition: background-color 0.3s ease;
   }
 
   body.dark-mode {
