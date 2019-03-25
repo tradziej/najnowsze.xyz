@@ -55,3 +55,39 @@ export const searchResultItemsList = createSelector(
     });
   }
 );
+
+const visibilityFilter = createSelector(
+  items,
+  state => state.visibilityFilter
+);
+
+export const filteredUnreadItems = createSelector(
+  unreadItemsList,
+  visibilityFilter,
+  (items, visibilityFilter) => {
+    switch (visibilityFilter) {
+      case 'SHOW_ALL':
+        return items;
+      case 'SHOW_IN_6H':
+        return items.filter(
+          item =>
+            new Date(item.promoted_at).valueOf() >=
+            Date.now() - 6 * 60 * 60 * 1000
+        );
+      case 'SHOW_IN_12H':
+        return items.filter(
+          item =>
+            new Date(item.promoted_at).valueOf() >=
+            Date.now() - 12 * 60 * 60 * 1000
+        );
+      case 'SHOW_IN_24H':
+        return items.filter(
+          item =>
+            new Date(item.promoted_at).valueOf() >=
+            Date.now() - 24 * 60 * 60 * 1000
+        );
+      default:
+        return items;
+    }
+  }
+);

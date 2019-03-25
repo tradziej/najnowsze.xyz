@@ -7,6 +7,7 @@ export type ItemsAction = ActionType<typeof items>;
 
 export type ItemsState = Readonly<{
   items: Item[];
+  visibilityFilter: string;
   loading: boolean;
   error: Error | null;
 }>;
@@ -16,6 +17,15 @@ export default combineReducers<ItemsState, ItemsAction>({
     switch (action.type) {
       case getType(items.loadItemsAsync.success):
         return action.payload;
+
+      default:
+        return state;
+    }
+  },
+  visibilityFilter: (state = 'SHOW_ALL', action) => {
+    switch (action.type) {
+      case 'SET_VISIBILITY_FILTER':
+        return action.filter;
 
       default:
         return state;

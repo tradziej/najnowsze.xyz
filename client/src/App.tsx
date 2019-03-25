@@ -42,10 +42,10 @@ const NavBar = styled.div`
 type Props = {
   loadItems: () => void;
   refreshItems: () => void;
-  unreadItems: Item[];
   readItems: Item[];
   searchResultItems: Item[];
   unreadItemsCount: number;
+  filteredUnreadItems: Item[];
   loading: boolean;
   error: string;
   searchTerm: string;
@@ -63,7 +63,7 @@ class App extends React.Component<Props> {
   public render() {
     const {
       searchResultItems,
-      unreadItems,
+      filteredUnreadItems,
       readItems,
       searchTerm,
     } = this.props;
@@ -86,7 +86,7 @@ class App extends React.Component<Props> {
                   <ItemList items={searchResultItems} />
                 ) : (
                   <Fragment>
-                    <UnreadItemList items={unreadItems} />
+                    <UnreadItemList items={filteredUnreadItems} />
                     <ReadItemList items={readItems} />
                   </Fragment>
                 )}
@@ -128,10 +128,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    unreadItems: selectors.unreadItemsList(state),
     readItems: selectors.readItemsList(state),
     searchResultItems: selectors.searchResultItemsList(state),
     unreadItemsCount: selectors.unreadItemsCount(state),
+    filteredUnreadItems: selectors.filteredUnreadItems(state),
     loading: state.itemsReducer.loading,
     error: state.itemsReducer.error,
     searchTerm: state.searchReducer.searchTerm,

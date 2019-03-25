@@ -5,7 +5,7 @@ import styled from '../../../styled-components';
 
 const StyledOl = styled.ol`
   list-style: inside decimal;
-  margin-top: 25px;
+  margin-top: 10px;
 `;
 
 type Props = {

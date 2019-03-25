@@ -46,3 +46,13 @@ export const refreshItems = () => (
       return dispatch(loadItemsAsync.failure(Error("Can't get items")));
     });
 };
+
+export interface SetVisibilityFilter {
+  type: 'SET_VISIBILITY_FILTER';
+  filter: string;
+}
+
+export const setVisibilityFilter = (filter: string): SetVisibilityFilter => ({
+  type: 'SET_VISIBILITY_FILTER',
+  filter,
+});
