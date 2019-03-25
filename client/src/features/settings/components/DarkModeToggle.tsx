@@ -1,5 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
+import { WbSunny as Sun } from 'styled-icons/material/WbSunny';
+import { Moon } from 'styled-icons/feather/Moon';
 import styled from '../../../styled-components';
 import { connect } from 'react-redux';
 
@@ -26,6 +28,16 @@ const DarkModeToggleContainer = styled.div`
   }
 `;
 
+const StyledSun = styled(Sun)`
+  width: 25px;
+  height: 25px;
+`;
+
+const StyledMoon = styled(Moon)`
+  width: 25px;
+  height: 25px;
+`;
+
 type Props = {
   isDarkMode: boolean;
   darkModeToggled: () => void;
@@ -48,14 +60,14 @@ class DarkModeToggle extends React.Component<Props, {}> {
     return (
       <DarkModeToggleContainer className="dark-mode-toggle">
         <button type="button" onClick={() => this.props.darkModeDisabled()}>
-          ☀
+          <StyledSun />
         </button>
         <Toggle
           checked={this.props.isDarkMode}
           onChange={() => this.props.darkModeToggled()}
         />
         <button type="button" onClick={() => this.props.darkModeEnabled()}>
-          ☾
+          <StyledMoon />
         </button>
       </DarkModeToggleContainer>
     );
