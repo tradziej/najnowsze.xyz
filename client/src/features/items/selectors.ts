@@ -43,7 +43,7 @@ const searchTerm = createSelector(
   state => state.searchTerm
 );
 
-export const filteredItemsList = createSelector(
+export const searchResultItemsList = createSelector(
   itemsList,
   searchTerm,
   (items, searchTerm) => {

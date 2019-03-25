@@ -44,7 +44,7 @@ type Props = {
   refreshItems: () => void;
   unreadItems: Item[];
   readItems: Item[];
-  filteredItems: Item[];
+  searchResultItems: Item[];
   unreadItemsCount: number;
   loading: boolean;
   error: string;
@@ -61,7 +61,12 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const { filteredItems, unreadItems, readItems, searchTerm } = this.props;
+    const {
+      searchResultItems,
+      unreadItems,
+      readItems,
+      searchTerm,
+    } = this.props;
 
     return (
       <ThemeProvider theme={this.props.isDarkTheme ? darkTheme : lightTheme}>
@@ -78,7 +83,7 @@ class App extends React.Component<Props> {
               <Fragment>
                 <SearchForm />
                 {searchTerm !== '' ? (
-                  <ItemList items={filteredItems} />
+                  <ItemList items={searchResultItems} />
                 ) : (
                   <Fragment>
                     <UnreadItemList items={unreadItems} />
@@ -125,7 +130,7 @@ const mapStateToProps = (state: any) => {
   return {
     unreadItems: selectors.unreadItemsList(state),
     readItems: selectors.readItemsList(state),
-    filteredItems: selectors.filteredItemsList(state),
+    searchResultItems: selectors.searchResultItemsList(state),
     unreadItemsCount: selectors.unreadItemsCount(state),
     loading: state.itemsReducer.loading,
     error: state.itemsReducer.error,
