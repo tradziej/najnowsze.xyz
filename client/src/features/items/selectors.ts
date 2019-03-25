@@ -9,7 +9,11 @@ const search = (state: any): SearchState => state.searchReducer;
 
 export const itemsList = createSelector(
   items,
-  state => state.items
+  state =>
+    state.items.sort(
+      (a, b) =>
+        new Date(b.promoted_at).valueOf() - new Date(a.promoted_at).valueOf()
+    )
 );
 
 const readTo = createSelector(
