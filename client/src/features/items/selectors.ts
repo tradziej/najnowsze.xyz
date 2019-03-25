@@ -20,13 +20,13 @@ const readTo = createSelector(
 export const readItemsList = createSelector(
   itemsList,
   readTo,
-  (items, readTo) => items.filter(item => item.created_at <= readTo)
+  (items, readTo) => items.filter(item => item.promoted_at <= readTo)
 );
 
 export const unreadItemsList = createSelector(
   itemsList,
   readTo,
-  (items, readTo) => items.filter(item => item.created_at > readTo)
+  (items, readTo) => items.filter(item => item.promoted_at > readTo)
 );
 
 export const unreadItemsCount = createSelector(
