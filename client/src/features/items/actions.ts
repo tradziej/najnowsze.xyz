@@ -3,6 +3,7 @@ import { Dispatch, AnyAction } from 'redux';
 import Item from '../../api/interfaces/item';
 import Api from '../../api';
 import { sessionTokenChanged } from '../settings/actions';
+import { markItemsAsReadAsync } from '../settings/actions';
 
 export const loadItemsAsync = createAsyncAction(
   'LOAD_ITEMS_REQUEST',
@@ -22,6 +23,8 @@ export const loadItems = () => (
     .then(res => {
       dispatch(sessionTokenChanged(res.headers['x-session-token']));
       const items = res.data.items;
+      const readTo = res.headers['x-read-to'];
+      dispatch(markItemsAsReadAsync.success(readTo));
       return dispatch(loadItemsAsync.success(items));
     })
     .catch((err: Error) => {
@@ -40,6 +43,8 @@ export const refreshItems = () => (
     .then(res => {
       dispatch(sessionTokenChanged(res.headers['x-session-token']));
       const items = res.data.items;
+      const readTo = res.headers['x-read-to'];
+      dispatch(markItemsAsReadAsync.success(readTo));
       return dispatch(loadItemsAsync.success(items));
     })
     .catch((err: Error) => {

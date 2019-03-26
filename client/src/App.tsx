@@ -2,6 +2,12 @@ import React, { Fragment } from 'react';
 import { Dispatch } from 'redux';
 import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  withRouter,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import styled, { ThemeProvider } from './styled-components';
 import media from './styles/media';
 import { GlobalStyle, lightTheme, darkTheme } from './styles';
@@ -14,6 +20,7 @@ import { loadItems, refreshItems } from './features/items/actions';
 import SearchForm from './features/search/components/SearchForm';
 import DarkModeToggle from './features/settings/components/DarkModeToggle';
 import Settings from './features/settings/components/Settings';
+import SessionSync from './features/settings/components/SessionSync';
 import * as selectors from './features/items/selectors';
 
 const Contianer = styled.div`
@@ -68,7 +75,16 @@ class App extends React.Component<Props> {
       searchTerm,
     } = this.props;
 
-    return (
+    // const routes = (
+    //   <Router>
+    //     <Switch>
+    //       <Route exact path='/' />
+    //       <Redirect from='*' to='/' />
+    //     </Switch>
+    //   </Router>
+    // );
+
+    const app = (
       <ThemeProvider theme={this.props.isDarkTheme ? darkTheme : lightTheme}>
         <Contianer>
           <NavBar>
@@ -96,6 +112,15 @@ class App extends React.Component<Props> {
           </main>
         </Contianer>
       </ThemeProvider>
+    );
+
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => app} />
+          <Route path="/:sessionToken?" component={SessionSync} />
+        </Switch>
+      </Router>
     );
   }
 
@@ -139,9 +164,9 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const connectedApp = connect(
+const connectedAppWithRouter = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(App) as any);
 
-export default hot(connectedApp);
+export default hot(connectedAppWithRouter);

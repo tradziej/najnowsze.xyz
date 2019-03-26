@@ -2,7 +2,7 @@ import React from 'react';
 import { Clock } from 'styled-icons/feather/Clock';
 import styled from '../../../styled-components';
 import Item from '../../../api/interfaces/item';
-import Link from './ItemLink';
+import ItemLink from './ItemLink';
 import { fontItalic } from '../../../styles/variables';
 import { ThemeProps } from '../../../styles/theme';
 import media from '../../../styles/media';
@@ -41,7 +41,7 @@ const StyledCockIcon = styled(Clock)`
 const ItemListElement: React.StatelessComponent<Props> = ({ item }) => {
   return (
     <StyledLi>
-      <Link item={item} />{' '}
+      <ItemLink item={item} />{' '}
       <Details>
         <PromotedAgo>
           <StyledCockIcon />
