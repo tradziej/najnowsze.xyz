@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Dispatch } from 'redux';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from './styled-components';
 import media from './styles/media';
@@ -144,4 +144,4 @@ const connectedApp = connect(
   mapDispatchToProps
 )(App);
 
-export default hot(module)(connectedApp);
+export default hot(connectedApp);
