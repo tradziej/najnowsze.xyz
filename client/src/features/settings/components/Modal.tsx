@@ -40,6 +40,10 @@ const ModalTitle = styled.div`
 
 const ModalContent = styled.div`
   padding-top: 15px;
+
+  div {
+    margin-bottom: 8px;
+  }
 `;
 
 const Close = styled(Cross).attrs({ size: `1.5em` })`

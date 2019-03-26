@@ -1,6 +1,7 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Copy } from 'styled-icons/boxicons-solid/Copy';
 import styled from '../../../styled-components';
 import { Settings as SettingsIcon } from 'styled-icons/material/Settings';
 import Modal from './Modal';
@@ -23,13 +24,39 @@ const StyledSettingsIcon = styled(SettingsIcon)`
   height: 25px;
 `;
 
+const StyledCopyIcon = styled(Copy)`
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  cursor: pointer;
+`;
+
+const SessionUrlInput = styled.input`
+  width: 90%;
+`;
+
 type Props = {
   isOpenLinksNewTab: boolean;
+  sessionToken: string;
   openLinksSettingsToggled: () => void;
 };
 
-const Settings = ({ isOpenLinksNewTab, openLinksSettingsToggled }: Props) => {
+const Settings = ({
+  isOpenLinksNewTab,
+  openLinksSettingsToggled,
+  sessionToken,
+}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState();
+  const urlRef = useRef<HTMLInputElement | null>(null);
+
+  const copyToClipboard = () => {
+    const node = urlRef.current;
+
+    if (node) {
+      node.select();
+      document.execCommand('copy');
+    }
+  };
 
   return (
     <Fragment>
@@ -48,6 +75,19 @@ const Settings = ({ isOpenLinksNewTab, openLinksSettingsToggled }: Props) => {
             checked={isOpenLinksNewTab}
             onChange={() => openLinksSettingsToggled()}
           />
+        </div>
+        <div>
+          Link do synchronizacji sesji:
+          <div>
+            <SessionUrlInput
+              ref={urlRef}
+              type="text"
+              readOnly
+              value={`${process.env.APP_URL}/${sessionToken}`}
+              onClick={() => copyToClipboard()}
+            />
+            <StyledCopyIcon onClick={() => copyToClipboard()} />
+          </div>
         </div>
         <div>
           <a
@@ -72,6 +112,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const mapStateToProps = ({ settingsReducer }: any) => {
   return {
     isOpenLinksNewTab: settingsReducer.openLinksNewTab,
+    sessionToken: settingsReducer.sessionToken,
   };
 };
 
