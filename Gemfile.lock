@@ -24,7 +24,7 @@ GEM
     jmespath (1.4.0)
     ox (2.10.0)
     public_suffix (3.0.3)
-    rack (2.0.6)
+    rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rspec (3.8.0)
