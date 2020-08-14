@@ -3,6 +3,7 @@
 ## Requirements
 
 * AWS CLI already [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) with at least PowerUser permission
+* [AWS SAM CLI](https://aws.amazon.com/serverless/sam/)
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/) 2.5 installed
 * [Docker installed](https://www.docker.com/community-edition)
 
