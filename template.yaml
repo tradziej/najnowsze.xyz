@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: "wykop.pl lite client"
+Description: 'wykop.pl lite client'
 Globals:
   Api:
     Cors:
@@ -13,7 +13,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: api.items_handler
-      Runtime: ruby2.5
+      Runtime: ruby2.7
       Timeout: 300
       Events:
         Request:
@@ -22,10 +22,10 @@ Resources:
             Path: /items
             Method: get
       Policies:
-      - DynamoDBReadPolicy:
-          TableName: !Ref ItemsTable
-      - DynamoDBCrudPolicy:
-          TableName: !Ref SessionsTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref ItemsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SessionsTable
       Environment:
         Variables:
           ITEMS_TABLE: !Ref ItemsTable
@@ -35,7 +35,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: api.read_handler
-      Runtime: ruby2.5
+      Runtime: ruby2.7
       Timeout: 300
       Events:
         Request:
@@ -44,8 +44,8 @@ Resources:
             Path: /read
             Method: put
       Policies:
-      - DynamoDBCrudPolicy:
-          TableName: !Ref SessionsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SessionsTable
       Environment:
         Variables:
           SESSIONS_TABLE: !Ref SessionsTable
@@ -54,11 +54,11 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: fetcher.handler
-      Runtime: ruby2.5
+      Runtime: ruby2.7
       Timeout: 300
       Policies:
-      - DynamoDBCrudPolicy:
-          TableName: !Ref ItemsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ItemsTable
       Environment:
         Variables:
           ITEMS_TABLE: !Ref ItemsTable
@@ -66,34 +66,28 @@ Resources:
   ItemsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      AttributeDefinitions: 
-        - 
-          AttributeName: "date"
-          AttributeType: "S"
-        - 
-          AttributeName: "time_guid"
-          AttributeType: "S"
-      KeySchema: 
-        - 
-          AttributeName: "date"
-          KeyType: "HASH"
-        - 
-          AttributeName: "time_guid"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
+      AttributeDefinitions:
+        - AttributeName: 'date'
+          AttributeType: 'S'
+        - AttributeName: 'time_guid'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'date'
+          KeyType: 'HASH'
+        - AttributeName: 'time_guid'
+          KeyType: 'RANGE'
+      BillingMode: 'PAY_PER_REQUEST'
 
   SessionsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      AttributeDefinitions: 
-        - 
-          AttributeName: "token"
-          AttributeType: "S"
-      KeySchema: 
-        - 
-          AttributeName: "token"
-          KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
+      AttributeDefinitions:
+        - AttributeName: 'token'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'token'
+          KeyType: 'HASH'
+      BillingMode: 'PAY_PER_REQUEST'
 
   ScheduledRule:
     Type: AWS::Events::Rule
@@ -101,8 +95,7 @@ Resources:
       ScheduleExpression: rate(2 minutes)
       State: ENABLED
       Targets:
-        -
-          Arn:
+        - Arn:
             Fn::GetAtt:
               - FetcherFunction
               - Arn
@@ -122,37 +115,37 @@ Resources:
 
 Outputs:
   ItemsTable:
-    Description: "Items Dynamo DB table"
+    Description: 'Items Dynamo DB table'
     Value:
       Fn::GetAtt:
-      - ItemsTable
-      - Arn
+        - ItemsTable
+        - Arn
 
   SessionsTable:
-    Description: "Sessions Dynamo DB table"
+    Description: 'Sessions Dynamo DB table'
     Value:
       Fn::GetAtt:
-      - SessionsTable
-      - Arn
+        - SessionsTable
+        - Arn
 
   FetcherFunction:
     Value:
       Fn::GetAtt:
-      - FetcherFunction
-      - Arn
+        - FetcherFunction
+        - Arn
 
   ApiGetItemsFunction:
     Value:
       Fn::GetAtt:
-      - ApiGetItemsFunction
-      - Arn
+        - ApiGetItemsFunction
+        - Arn
 
   ApiMarkAsReadFunction:
     Value:
       Fn::GetAtt:
-      - ApiMarkAsReadFunction
-      - Arn
+        - ApiMarkAsReadFunction
+        - Arn
 
   ApiUrl:
-    Description: "Gateway endpoint for JSON API"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Description: 'Gateway endpoint for JSON API'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'

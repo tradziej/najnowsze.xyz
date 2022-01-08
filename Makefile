@@ -7,7 +7,7 @@ install:
 	@bundle install --no-deployment --with test
 
 install-deployment:
-	@docker run -v `pwd`:`pwd` -w `pwd` -i -t lambci/lambda:build-ruby2.5 \
+	@docker run -v `pwd`:`pwd` -w `pwd` -i -t lambci/lambda:build-ruby2.7 \
 			bundle install --deployment --without test development
 
 test:
