@@ -32,6 +32,6 @@ class Feed
   end
 
   def url
-    URI('https://wykop-rss.herokuapp.com/promoted')
+    URI('https://wykop-rss.fly.dev/promoted')
   end
 end
