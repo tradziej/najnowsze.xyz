@@ -154,3 +154,7 @@ aws cloudfront create-invalidation --distribution-id {DISTRIBUTION_ID} --paths '
 ## Makefile
 
 Project contains the [Makefile](Makefile) which you could use for several common tasks after customisation.
+Most common:
+
+- make sam-package
+- make sam-deploy
